@@ -1,5 +1,23 @@
-.st0{fill:none;stroke:#ECECED;stroke-width:1.0001;stroke-linejoin:round;stroke-miterlimit:22.9256;}
-.st1{fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_1_);}
-.st2{fill-rule:evenodd;clip-rule:evenodd;fill:#6F6F6E;}
-.st3{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#ECECED;stroke-width:1.0001;stroke-linejoin:round;stroke-miterlimit:22.9256;}
-.st4{fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_2_);}
+.balloon {
+	width: 500px;
+	position: relative;
+}
+
+.balloon__logo {
+	fill: #ffffff;
+}
+.balloon__top-border,
+.balloon__pucka-border {
+	stroke: #ECECED;
+	stroke-width: 1;
+	stroke-linejoin: round;
+}
+.balloon__top-gradient {
+	fill: url(#balloon-gradient);
+}
+.balloon__pucka-gradient {
+	fill: url(#pucka-gradient);
+}
+.balloon__line-rope {
+	fill: #6F6F6E;
+}
