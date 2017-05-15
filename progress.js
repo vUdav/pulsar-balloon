@@ -5,8 +5,8 @@ var cw = canvas.width;
 var ch = canvas.height;
 
 // Const
-var color = '#cccccc';
-var time = canvas.getAttribute('data-time'); //seconds
+var color = '#a5dcfb';
+var time = canvas.getAttribute('data-time');
 
 // Interval
 var interval = 2/time;
