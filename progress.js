@@ -9,7 +9,8 @@ var circleArrSetting = [];
 var timerCount = 0;
 
 // Const
-var color = '#a5dcfb';
+var color = '#fff';
+// var color = '#a5dcfb';
 var time = canvas.getAttribute('data-time');
 var circleCount = canvas.getAttribute('data-count');
 
@@ -23,7 +24,6 @@ function init () {
 
 	for (var i = 0; i < circleCount; i++) {
 		circleArrSetting.push({
-			id: i,
 			active: false,
 			end: false
 		});
@@ -38,8 +38,6 @@ function init () {
 				circleArrSetting[timerCount-1].end = true;
 			}
 			circleArrSetting[timerCount].active = true;
-			console.log(timerCount);
-			console.log(circleArrSetting);
 			// Countdown
 			var countdown = setInterval(function () {
 				draw(start*Math.PI);
@@ -56,24 +54,19 @@ function init () {
 }
 
 function draw(end) {
+	var currentEnd = end;
 	strokeWidth = strokeWidthFactor;
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 	for (var i = 0; i < circleCount; i++) {
-		if(!circleArrSetting[i].active && !circleArrSetting[i].end) {
-			ctx.beginPath();
-			ctx.arc(cw/2, ch/2, cw * strokeWidth, 0, 2*Math.PI, true);
-			ctx.stroke();
-		}
-		if(circleArrSetting[i].active && !circleArrSetting[i].end) {
-			ctx.beginPath();
-			ctx.arc(cw/2, ch/2, cw * strokeWidth, 0, end, true);
-			ctx.stroke();
-		}
-		if(!circleArrSetting[i].active && circleArrSetting[i].end) {
-			ctx.beginPath();
-			ctx.arc(cw/2, ch/2, cw * strokeWidth, 0, 0*Math.PI, true);
-			ctx.stroke();
-		}
+		if(!circleArrSetting[i].active && !circleArrSetting[i].end)
+			currentEnd = 2*Math.PI;
+		if(circleArrSetting[i].active && !circleArrSetting[i].end)
+			currentEnd = end;
+		if(!circleArrSetting[i].active && circleArrSetting[i].end)
+			currentEnd = 0*Math.PI;
+		ctx.beginPath();
+		ctx.arc(cw/2, ch/2, cw * strokeWidth, 0, currentEnd, true);
+		ctx.stroke();
 		strokeWidth -= .05;
 	}
 }
