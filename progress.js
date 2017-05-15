@@ -3,40 +3,79 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var cw = canvas.width;
 var ch = canvas.height;
+var strokeWidthFactor = 0.45;
+var strokeWidth = strokeWidthFactor;
+var circleArrSetting = [];
+var timerCount = 0;
 
 // Const
 var color = '#a5dcfb';
 var time = canvas.getAttribute('data-time');
+var circleCount = canvas.getAttribute('data-count');
 
 // Interval
 var interval = 2/time;
 var start = interval;
 
 function init () {
-	ctx.beginPath();
-	ctx.lineWidth = cw * .04;
+	ctx.lineWidth = cw * .03;
 	ctx.strokeStyle = color;
-	ctx.arc(cw/2, ch/2, cw * .45, 0, 2*Math.PI, true);
-	ctx.stroke();
 
-	// Countdown
-	var countdown = setInterval(function () {
-		draw(start*Math.PI);
-		start += interval;
-	}, 1000);
-	
-	// Stop countdown
-	setTimeout(function() {
-		clearInterval(countdown);
-		draw(0*Math.PI);
-	}, time*1000);
+	for (var i = 0; i < circleCount; i++) {
+		circleArrSetting.push({
+			id: i,
+			active: false,
+			end: false
+		});
+		ctx.beginPath();
+		ctx.arc(cw/2, ch/2, cw * strokeWidth, 0, 2*Math.PI, true);
+		ctx.stroke();
+		strokeWidth -= .05;
+
+		setTimeout(function() {
+			if(timerCount > 0) {
+				circleArrSetting[timerCount-1].active = false;
+				circleArrSetting[timerCount-1].end = true;
+			}
+			circleArrSetting[timerCount].active = true;
+			console.log(timerCount);
+			console.log(circleArrSetting);
+			// Countdown
+			var countdown = setInterval(function () {
+				draw(start*Math.PI);
+				start += interval;
+			}, 1000);
+			
+			// Stop countdown
+			setTimeout(function() {
+				clearInterval(countdown);
+			}, time*1000);
+			timerCount += 1;
+		}, time*1000*i);
+	}
 }
 
 function draw(end) {
+	strokeWidth = strokeWidthFactor;
 	ctx.clearRect(0,0,canvas.width,canvas.height);
-	ctx.beginPath();
-	ctx.arc(cw/2, ch/2, cw * .45, 0, end, true);
-	ctx.stroke();
+	for (var i = 0; i < circleCount; i++) {
+		if(!circleArrSetting[i].active && !circleArrSetting[i].end) {
+			ctx.beginPath();
+			ctx.arc(cw/2, ch/2, cw * strokeWidth, 0, 2*Math.PI, true);
+			ctx.stroke();
+		}
+		if(circleArrSetting[i].active && !circleArrSetting[i].end) {
+			ctx.beginPath();
+			ctx.arc(cw/2, ch/2, cw * strokeWidth, 0, end, true);
+			ctx.stroke();
+		}
+		if(!circleArrSetting[i].active && circleArrSetting[i].end) {
+			ctx.beginPath();
+			ctx.arc(cw/2, ch/2, cw * strokeWidth, 0, 0*Math.PI, true);
+			ctx.stroke();
+		}
+		strokeWidth -= .05;
+	}
 }
 
 init ();

@@ -18,33 +18,3 @@
 	left: 360px;
 	z-index: 2;
 }
-
-/*.balloon__logo {
-	fill: #ffffff;
-}
-.balloon__top-border,
-.balloon__pucka-border {
-	stroke: #ECECED;
-	stroke-width: 1;
-	stroke-linejoin: round;
-}
-.balloon__top-gradient {
-	fill: url(#balloon-gradient);
-}
-.balloon__pucka-gradient {
-	fill: url(#pucka-gradient);
-}
-.balloon__line-rope {
-	fill: #6F6F6E;
-}
-
-.balloon__top {
-	animation-name: pulse;
-	animation-duration: 3s;
-	animation-iteration-count: infinite;
-}
-
-@keyframes pulse {
-	0% {transform: scale(1);}
-	50% {transform: scale(1.1);}
-}*/
