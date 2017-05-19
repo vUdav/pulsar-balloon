@@ -9,7 +9,7 @@ var circleArrSetting = [];
 var timerCount = 0;
 
 // Const
-var color = '#a5dcfb';
+var color = '#ffffff';
 var time = canvas.getAttribute('data-time');
 var circleCount = canvas.getAttribute('data-count');
 
